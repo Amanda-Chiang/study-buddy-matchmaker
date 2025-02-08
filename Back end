@@ -1,0 +1,113 @@
+from typing import List, Dict
+
+def calculate_match_score (UserA: Dict, userB: Dict) -> float:
+    """
+    Calculate a match score based on shared attributes.
+    You can customize weights as needed.
+    """
+    score = 0.0
+    shared_courses = set(userA["courses"]).intersection(set(userB["courses"]))
+    score+=3.0 * len(shared_courses)
+    
+    shared_professors = set(userA["professors"]).intersection(set(userB["professors"]))
+    score+=1.5 * len(shared_professors)
+
+    shared_times = set(userA["study_times"]).intersection(set(userB["study_times"]))
+    score+=1.0 * len(shared_times)
+
+    if userA ["study_style"] == userB["study"]:
+    score+=2.0
+
+    if userA["intensity"]== userB["intensity"]:
+    score+=2.0
+
+    if userA["study_goal"] == userB["study_goal"]:
+    score+=1.0
+
+    return score
+
+    """
+    Given a current_user and a list of all_users,
+    returns a list of the top_n best calculate_match_score
+    """
+
+    other_users = [user for user in all_users if user["id"] != current_user["id"]]
+    scores = []
+    for user in other_users:
+        match_score = calculate_match_score(current_user, user)
+        score.append((user, match_score))
+
+    scores.sort(key=lambda x: x[1], reverse=True)
+    return [user_score[0] for user_scorein scores[:top_n]]
+
+    if _name_ == "_main_":
+        sample_users = [
+        {
+            "id": 1,
+            "name": "Alice",
+            "courses": ["CS101", "MATH201"],
+            "professors": ["Dr. Smith", "Dr.Jones"],
+            "study_times": ["mornings", "weekends"], 
+            "study_style": "library",
+            "intensity": "intensive",
+            "study_goal": "midterm"
+
+        }
+        {
+            "id": 2,
+            "name": "Amanda", 
+            "courses": ["CS101", "ENGL202"],
+            "professors": ["Dr.Jones"],
+            "study_times": ["weekends"],
+            "study_style": "library",
+            "intensity": "intensive",
+            "study_goal": "midterm"
+
+        }
+        {
+            "id": 3,
+            "name": "Sophia",
+            "courses": "MATH201", "HIST101"],
+            "professors": "Dr.Jones"],
+            "study_times": ["weekends"], 
+            "study_style": "library",
+            "intensity": "intensive",
+            "study_goal": "midterm"
+
+        }
+        {
+            "id": 4, 
+            "name": "Emma", 
+            "courses": ["CS101", "MATH201", "HIST101"], 
+            "professors": ["Dr.Smith", "Dr. Jones", "Prof.Brown"], 
+            "study_times": ["afternoons", "weekends"], 
+            "study_style": "library", 
+            "intensity": "intensive", 
+            "study_goal": "midterm"
+
+        }
+        ]
+
+        current_user = samples_users[0] #Alice
+        top_matches = find_study_buddies(current_users, samples_users, top_n=2)
+
+        print(f"Top matches for {current_user['name']}:")
+        for match in top_matches:
+            print (f" - {match['name']}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
